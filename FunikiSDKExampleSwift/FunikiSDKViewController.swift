@@ -4,8 +4,9 @@
 //
 
 import UIKit
+import CoreLocation
 
-class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFunikiManagerDataDelegate {
+class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFunikiManagerDataDelegate, CLLocationManagerDelegate {
 
     let funikiManager = MAFunikiManager.sharedInstance()
     
@@ -15,7 +16,29 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
     @IBOutlet var connectionLabel:UILabel!
     @IBOutlet var batteryLabel:UILabel!
     @IBOutlet weak var sdkVersionLabel: UILabel!
-
+    @IBOutlet weak var latitudeLabel: UILabel!
+    @IBOutlet weak var longitudeLabel: UILabel!
+    @IBAction func location(sender: AnyObject) {
+//        locationManager?.startUpdatingLocation()
+    }
+    
+    var locationManager: CLLocationManager?
+    
+    // Delegateメソッド
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let coordinate = locations[0].coordinate
+        
+        let now = NSDate()
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
+        dateFormatter.timeStyle = .ShortStyle
+        dateFormatter.dateStyle = .ShortStyle
+        let d = dateFormatter.stringFromDate(now)
+        
+        latitudeLabel.text = "\(coordinate.latitude)\r\n\(d)"
+        longitudeLabel.text = "\(coordinate.longitude)\n\(d)"
+    }
+    
     // MARK: -
     func updateConnectionStatus() {
         if funikiManager.connected {
@@ -48,6 +71,19 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         
         self.volumeSegmentedControl.selectedSegmentIndex = 2
         self.sdkVersionLabel.text = "SDK Version:" + MAFunikiManager.funikiSDKVersionString()
+        
+        // Location Managerの生成、初期化
+        locationManager = CLLocationManager()
+        if #available(iOS 9.0, *) {
+            locationManager?.allowsBackgroundLocationUpdates = true
+        }
+        locationManager?.distanceFilter = 500 // 500m移動したら通知する。
+        locationManager?.delegate = self
+        if CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedAlways { // 注1
+            locationManager?.requestAlwaysAuthorization()
+            // 位置情報サービスを開始するか、ユーザに尋ねるダイアログを表示する。
+        }
+        locationManager?.startUpdatingLocation()
         
     }
     
