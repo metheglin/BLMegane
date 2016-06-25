@@ -19,24 +19,98 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
     @IBOutlet weak var latitudeLabel: UILabel!
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBAction func location(sender: AnyObject) {
-//        locationManager?.startUpdatingLocation()
+        locationManager?.startUpdatingLocation()
     }
     
     var locationManager: CLLocationManager?
     
-    // Delegateメソッド
+    // 日本測地系座標を世界測地系座標に変換しますが、おそらくこの処理は不要...
+    func convertToWGS84( lat_tokyo: Float64, lng_tokyo: Float64 ) -> CLLocation {
+        let a = 1.00010696
+        let b = 0.000017467
+        let c = 0.000046047
+        let d = 1.000083049
+        let p = 0.0046020
+        let q = 0.010041
+        
+        let ad_bc = (a * d) + (b * c)
+        let x_p = lat_tokyo + p
+        let y_q = lng_tokyo + q
+        
+        let lat_wgs84 = ((d * x_p) + (b * y_q)) / ad_bc
+        let lng_wgs84 = -1 * ((c * x_p) - (a * y_q)) / ad_bc
+        
+        print(String(format: "lat1 %f", lat_tokyo))
+        print(String(format: "lng1 %f", lng_tokyo))
+        print(String(format: "lat2 %f", lat_wgs84))
+        print(String(format: "lng2 %f", lng_wgs84))
+        return CLLocation( latitude: lat_wgs84, longitude: lng_wgs84 )
+    }
+    
+    // Location更新イベント
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let coordinate = locations[0].coordinate
         
-        let now = NSDate()
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
-        dateFormatter.timeStyle = .ShortStyle
-        dateFormatter.dateStyle = .ShortStyle
-        let d = dateFormatter.stringFromDate(now)
+        // WGS84（世界測地系）で取得される
+        let coord = locations[0].coordinate
         
-        latitudeLabel.text = "\(coordinate.latitude)\r\n\(d)"
-        longitudeLabel.text = "\(coordinate.longitude)\n\(d)"
+//        let now = NSDate()
+//        let dateFormatter = NSDateFormatter()
+//        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
+//        dateFormatter.timeStyle = .ShortStyle
+//        dateFormatter.dateStyle = .ShortStyle
+//        let d = dateFormatter.stringFromDate(now)
+//        print(String(format: "now: %s", d))
+        
+        latitudeLabel.text = String(format: "%f", coord.latitude)
+        longitudeLabel.text = String(format: "%f", coord.longitude)
+        
+        // 距離
+        let curLocation = CLLocation(latitude: coord.latitude, longitude: coord.longitude)
+        if checkInsideDangerZone( curLocation ) {
+            enableCriminalSuppressor()
+        } else {
+            disableCriminalSuppressor()
+        }
+    }
+    
+    func checkInsideDangerZone( curLocation: CLLocation ) -> Bool {
+        let dangerZones:[String:[String:Double]] = [
+            "新宿駅":[
+                "latitude": 35.690921,
+                "longitude": 139.70025799999996,
+                "radius": 200.0,
+            ],
+            "池袋駅":[
+                "latitude": 35.728926,
+                "longitude": 139.71038,
+                "radius": 1000.0,
+            ],
+        ]
+        
+        for (key, zone) in dangerZones {
+            print(key)
+            let lat = zone["latitude"]
+            let lng = zone["longitude"]
+            let rad:Double? = zone["radius"]
+            let targetLocation = CLLocation(latitude: lat!, longitude: lng!)
+            let distance = curLocation.distanceFromLocation(targetLocation)
+            print(String(format: "\(key)までの距離 %fm", distance))
+            if distance <= rad {
+                print("危険ゾーンに入ってます")
+                return true
+            }
+        }
+        return false
+    }
+    
+    func enableCriminalSuppressor() {
+        if (funikiManager.connected){
+            funikiManager.changeLeftColor(UIColor.blueColor(), rightColor: UIColor.blueColor(), duration: 1.0, buzzerFrequency: freqFromSlider(), buzzerVolume: selectedBuzzerVolume())
+        }
+    }
+    
+    func disableCriminalSuppressor() {
+        funikiManager.changeLeftColor(UIColor.blackColor(), rightColor: UIColor.blackColor(), duration: 1.0)
     }
     
     // MARK: -
@@ -83,7 +157,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
             locationManager?.requestAlwaysAuthorization()
             // 位置情報サービスを開始するか、ユーザに尋ねるダイアログを表示する。
         }
-        locationManager?.startUpdatingLocation()
+//        locationManager?.startUpdatingLocation()
         
     }
     
@@ -106,6 +180,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         print("Firmware Revision\(manager.firmwareRevision)")
         updateConnectionStatus()
         updateBatteryLevel()
+        locationManager?.startUpdatingLocation()
     }
     
     func funikiManagerDidDisconnect(manager: MAFunikiManager!, error: NSError!) {
@@ -115,6 +190,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         }
         updateConnectionStatus()
         updateBatteryLevel()
+        locationManager?.stopUpdatingLocation()
     }
     
     func funikiManager(manager: MAFunikiManager!, didUpdateBatteryLevel batteryLevel: MAFunikiManagerBatteryLevel) {
