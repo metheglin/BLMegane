@@ -24,7 +24,6 @@
 		8C79FE521A7DC8EC0091F040 /* SDKlogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C79FE461A7DC8EC0091F040 /* SDKlogo@2x.png */; };
 		8C79FE531A7DC8EC0091F040 /* SDKtab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C79FE471A7DC8EC0091F040 /* SDKtab@2x.png */; };
 		8C79FE541A7DC8EC0091F040 /* Sensor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C79FE481A7DC8EC0091F040 /* Sensor@2x.png */; };
-		8C79FE561A7DC9800091F040 /* FunikiSDKMotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79FE551A7DC9800091F040 /* FunikiSDKMotionViewController.swift */; };
 		8C79FE581A7DC9C80091F040 /* FunikiDevicePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79FE571A7DC9C80091F040 /* FunikiDevicePickerViewController.swift */; };
 		8C8E3D1E1A7DD68A00349FA0 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8C8E3D1D1A7DD68A00349FA0 /* Icon-60@2x.png */; };
 		8CA309A01A8C4AB0002A2DD3 /* Funiki.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CA3099E1A8C4AB0002A2DD3 /* Funiki.m */; };
@@ -50,7 +49,6 @@
 		8C79FE461A7DC8EC0091F040 /* SDKlogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SDKlogo@2x.png"; sourceTree = "<group>"; };
 		8C79FE471A7DC8EC0091F040 /* SDKtab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SDKtab@2x.png"; sourceTree = "<group>"; };
 		8C79FE481A7DC8EC0091F040 /* Sensor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Sensor@2x.png"; sourceTree = "<group>"; };
-		8C79FE551A7DC9800091F040 /* FunikiSDKMotionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunikiSDKMotionViewController.swift; sourceTree = "<group>"; };
 		8C79FE571A7DC9C80091F040 /* FunikiDevicePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FunikiDevicePickerViewController.swift; sourceTree = "<group>"; };
 		8C8E3D1D1A7DD68A00349FA0 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 		8CA3099E1A8C4AB0002A2DD3 /* Funiki.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Funiki.m; sourceTree = "<group>"; };
@@ -99,7 +97,6 @@
 			children = (
 				8C79FE0A1A7DBEB80091F040 /* AppDelegate.swift */,
 				8C79FE0C1A7DBEB80091F040 /* FunikiSDKViewController.swift */,
-				8C79FE551A7DC9800091F040 /* FunikiSDKMotionViewController.swift */,
 				8C79FE571A7DC9C80091F040 /* FunikiDevicePickerViewController.swift */,
 				8C79FE3C1A7DC8EC0091F040 /* FunikiSDKExample.storyboard */,
 				8C79FE3D1A7DC8EC0091F040 /* SDKImage */,
@@ -242,7 +239,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C79FE581A7DC9C80091F040 /* FunikiDevicePickerViewController.swift in Sources */,
-				8C79FE561A7DC9800091F040 /* FunikiSDKMotionViewController.swift in Sources */,
 				8C79FE0D1A7DBEB80091F040 /* FunikiSDKViewController.swift in Sources */,
 				8CA309A01A8C4AB0002A2DD3 /* Funiki.m in Sources */,
 				8C79FE0B1A7DBEB80091F040 /* AppDelegate.swift in Sources */,
