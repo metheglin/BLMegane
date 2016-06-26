@@ -64,6 +64,18 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnetic.png" id="B14-6O-V0L">
+                                        <rect key="frame" x="10" y="200" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowToDanger.png" id="SyF-gb-XzU">
+                                        <rect key="frame" x="49" y="226" width="26" height="48"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowCurrent.png" id="76K-xf-iQx">
+                                        <rect key="frame" x="50" y="238" width="24" height="24"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -105,11 +117,14 @@
                     <tabBarItem key="tabBarItem" title="Blue Light" image="Illuminate.png" id="7T8-wU-qrZ" userLabel="Blue Light"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="arrowCurrentView" destination="76K-xf-iQx" id="wgK-Fy-Fx3"/>
+                        <outlet property="arrowToDangerView" destination="SyF-gb-XzU" id="mU0-qX-X05"/>
                         <outlet property="batteryLabel" destination="MjN-au-oBH" id="Jmm-dF-7f7"/>
                         <outlet property="connectionLabel" destination="iwE-sx-mwM" id="wZ1-5m-2f8"/>
                         <outlet property="dangerStatusLabel" destination="J3O-cq-QHL" id="2PZ-Ov-eTb"/>
                         <outlet property="latitudeLabel" destination="vE8-rB-n46" id="974-EO-51w"/>
                         <outlet property="longitudeLabel" destination="Gg6-uJ-NZG" id="3sb-iJ-Wi8"/>
+                        <outlet property="magneticView" destination="B14-6O-V0L" id="coh-ck-dkQ"/>
                         <outlet property="sdkVersionLabel" destination="aax-GD-93K" id="ENm-MK-lde"/>
                     </connections>
                 </viewController>
@@ -127,7 +142,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellIdentifier" id="gws-H7-WO7">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gws-H7-WO7" id="nHI-zU-Mho">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
@@ -194,5 +209,8 @@
         <image name="Illuminate.png" width="40" height="35"/>
         <image name="Pairing.png" width="295" height="49"/>
         <image name="SDKlogo.png" width="120" height="26"/>
+        <image name="arrowCurrent.png" width="99" height="112"/>
+        <image name="arrowToDanger.png" width="138" height="273"/>
+        <image name="magnetic.png" width="600" height="600"/>
     </resources>
 </document>

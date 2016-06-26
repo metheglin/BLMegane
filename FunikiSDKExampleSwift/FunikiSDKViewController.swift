@@ -20,7 +20,9 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         locationManager?.startUpdatingLocation()
     }
     @IBOutlet weak var dangerStatusLabel: UILabel!
-    
+    @IBOutlet weak var magneticView: UIImageView!
+    @IBOutlet weak var arrowCurrentView: UIImageView!
+    @IBOutlet weak var arrowToDangerView: UIImageView!
     var locationManager: CLLocationManager?
     var dangerZones: JSON?
     var angleToDanger: Double = 0.0
@@ -95,15 +97,15 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
     // デバイスの方位が変わるたびに呼ばれる
     func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         let heading: CLLocationDirection = newHeading.magneticHeading
-        // アニメーションでコンパス画像を回転する
-//        [UIView beginAnimations:nil context:nil];
-//        [UIView setAnimationDuration:0.5f];
-//        compass.transform = CGAffineTransformMakeRotation(-(M_PI * (currentDir / 180)));
-//        CGAffineTransformMakeRotation( degreesToRadians(heading) )
-//        [UIView commitAnimations];
         
         print("heading: \(angleToDanger) \(heading)")
-//        self.textField.text = [NSString stringWithFormat:@"%.2f", heading];
+        
+        arrowToDangerView.layer.anchorPoint = CGPointMake(0.5, 1.0)
+        arrowToDangerView.transform = CGAffineTransformMakeRotation( CGFloat(degreesToRadians(angleToDanger)) )
+        UIView.animateWithDuration(0.2) {
+            self.arrowCurrentView.layer.anchorPoint = CGPointMake(0.5, 0.9)
+            self.arrowCurrentView.transform = CGAffineTransformMakeRotation( CGFloat(self.degreesToRadians(heading)) )
+        }
     }
     
     func getDangerZones() {

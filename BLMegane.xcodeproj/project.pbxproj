@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		80A8E0691D20587E003F2FA0 /* magnetic.png in Resources */ = {isa = PBXBuildFile; fileRef = 80A8E0681D20587E003F2FA0 /* magnetic.png */; };
+		80A8E06B1D20596A003F2FA0 /* arrowToDanger.png in Resources */ = {isa = PBXBuildFile; fileRef = 80A8E06A1D20596A003F2FA0 /* arrowToDanger.png */; };
+		80A8E06D1D205A43003F2FA0 /* arrowCurrent.png in Resources */ = {isa = PBXBuildFile; fileRef = 80A8E06C1D205A43003F2FA0 /* arrowCurrent.png */; };
 		80D755631D1FCFA8006E03AC /* json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D755621D1FCFA8006E03AC /* json.swift */; };
 		8C79FE0B1A7DBEB80091F040 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79FE0A1A7DBEB80091F040 /* AppDelegate.swift */; };
 		8C79FE0D1A7DBEB80091F040 /* FunikiSDKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79FE0C1A7DBEB80091F040 /* FunikiSDKViewController.swift */; };
@@ -30,6 +33,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		80A8E0681D20587E003F2FA0 /* magnetic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnetic.png; sourceTree = "<group>"; };
+		80A8E06A1D20596A003F2FA0 /* arrowToDanger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowToDanger.png; sourceTree = "<group>"; };
+		80A8E06C1D205A43003F2FA0 /* arrowCurrent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowCurrent.png; sourceTree = "<group>"; };
 		80D755621D1FCFA8006E03AC /* json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = json.swift; sourceTree = "<group>"; };
 		8C79FE051A7DBEB80091F040 /* BLMegane.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLMegane.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C79FE091A7DBEB80091F040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -134,6 +140,9 @@
 		8C79FE3D1A7DC8EC0091F040 /* SDKImage */ = {
 			isa = PBXGroup;
 			children = (
+				80A8E06C1D205A43003F2FA0 /* arrowCurrent.png */,
+				80A8E06A1D20596A003F2FA0 /* arrowToDanger.png */,
+				80A8E0681D20587E003F2FA0 /* magnetic.png */,
 				8C8E3D1D1A7DD68A00349FA0 /* Icon-60@2x.png */,
 				8C79FE3E1A7DC8EC0091F040 /* Button-blue@2x.png */,
 				8C79FE3F1A7DC8EC0091F040 /* Button-green@2x.png */,
@@ -217,6 +226,8 @@
 				8C79FE491A7DC8EC0091F040 /* FunikiSDKExample.storyboard in Resources */,
 				8C79FE501A7DC8EC0091F040 /* Illuminate@2x.png in Resources */,
 				8C79FE121A7DBEB80091F040 /* Images.xcassets in Resources */,
+				80A8E06B1D20596A003F2FA0 /* arrowToDanger.png in Resources */,
+				80A8E06D1D205A43003F2FA0 /* arrowCurrent.png in Resources */,
 				8C8E3D1E1A7DD68A00349FA0 /* Icon-60@2x.png in Resources */,
 				8C79FE4B1A7DC8EC0091F040 /* Button-green@2x.png in Resources */,
 				8C79FE521A7DC8EC0091F040 /* SDKlogo@2x.png in Resources */,
@@ -226,6 +237,7 @@
 				8C79FE4D1A7DC8EC0091F040 /* Button-red@2x.png in Resources */,
 				8C79FE4E1A7DC8EC0091F040 /* Default-568h@2x.png in Resources */,
 				8C79FE4A1A7DC8EC0091F040 /* Button-blue@2x.png in Resources */,
+				80A8E0691D20587E003F2FA0 /* magnetic.png in Resources */,
 				8C79FE511A7DC8EC0091F040 /* Pairing@2x.png in Resources */,
 				8C79FE531A7DC8EC0091F040 /* SDKtab@2x.png in Resources */,
 			);
