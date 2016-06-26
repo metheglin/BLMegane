@@ -23,6 +23,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
     }
     
     var locationManager: CLLocationManager?
+    var dangerZones: JSON?
     
     // 日本測地系座標を世界測地系座標に変換しますが、おそらくこの処理は不要...
     func convertToWGS84( lat_tokyo: Float64, lng_tokyo: Float64 ) -> CLLocation {
@@ -49,17 +50,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
     
     // Location更新イベント
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        // WGS84（世界測地系）で取得される
         let coord = locations[0].coordinate
-        
-//        let now = NSDate()
-//        let dateFormatter = NSDateFormatter()
-//        dateFormatter.locale = NSLocale(localeIdentifier: "ja_JP")
-//        dateFormatter.timeStyle = .ShortStyle
-//        dateFormatter.dateStyle = .ShortStyle
-//        let d = dateFormatter.stringFromDate(now)
-//        print(String(format: "now: %s", d))
         
         latitudeLabel.text = String(format: "%f", coord.latitude)
         longitudeLabel.text = String(format: "%f", coord.longitude)
@@ -73,33 +64,45 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         }
     }
     
-    func checkInsideDangerZone( curLocation: CLLocation ) -> Bool {
-        let dangerZones:[String:[String:Double]] = [
-            "新宿駅":[
-                "latitude": 35.690921,
-                "longitude": 139.70025799999996,
-                "radius": 200.0,
-            ],
-            "池袋駅":[
-                "latitude": 35.728926,
-                "longitude": 139.71038,
-                "radius": 1000.0,
-            ],
+    func getDangerZones() {
+        self.dangerZones = JSON(url:"https://s3-ap-northeast-1.amazonaws.com/sakalava/BLMegane/danger_zones.json")
+        print("dangerZones\(dangerZones)")
+    }
+    
+    func getNearesDangerZone( curLocation: CLLocation ) -> (nearestDistance:Double, nearest:JSON) {
+        let nearestObj:[String:Double] = [
+            "latitude": 0.0,
+            "longitude": 0.0,
+            "radius": 0.0,
         ]
+        var nearest:JSON = JSON(nearestObj)
+        var nearestDistance:Double = Double.infinity
         
-        for (key, zone) in dangerZones {
-            print(key)
-            let lat = zone["latitude"]
-            let lng = zone["longitude"]
-            let rad:Double? = zone["radius"]
+        for (key, zone) in self.dangerZones! {
+            let lat:Double? = zone["latitude"].asDouble
+            let lng:Double? = zone["longitude"].asDouble
             let targetLocation = CLLocation(latitude: lat!, longitude: lng!)
             let distance = curLocation.distanceFromLocation(targetLocation)
-            print(String(format: "\(key)までの距離 %fm", distance))
-            if distance <= rad {
-                print("危険ゾーンに入ってます")
-                return true
+            if distance < nearestDistance {
+                nearest = zone
+                nearestDistance = distance
             }
+            print(String(format: "\(key)までの距離 %fm", distance))
         }
+        return (nearestDistance, nearest)
+    }
+    
+    func checkInsideDangerZone( curLocation: CLLocation ) -> Bool {
+        let dangerZone:(Double,JSON) = getNearesDangerZone( curLocation )
+        let distance:Double = dangerZone.0
+        let zone:JSON = dangerZone.1
+        let radius:Double? = zone["radius"].asDouble
+        
+        if distance <= radius {
+            print("危険ゾーンに入ってます")
+            return true
+        }
+        print("最寄りの危険ゾーンまで\(distance)mです")
         return false
     }
     
@@ -158,6 +161,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
             // 位置情報サービスを開始するか、ユーザに尋ねるダイアログを表示する。
         }
 //        locationManager?.startUpdatingLocation()
+        getDangerZones()
         
     }
     

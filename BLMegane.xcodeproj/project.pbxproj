@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		80D755631D1FCFA8006E03AC /* json.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D755621D1FCFA8006E03AC /* json.swift */; };
 		8C79FE0B1A7DBEB80091F040 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79FE0A1A7DBEB80091F040 /* AppDelegate.swift */; };
 		8C79FE0D1A7DBEB80091F040 /* FunikiSDKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C79FE0C1A7DBEB80091F040 /* FunikiSDKViewController.swift */; };
 		8C79FE121A7DBEB80091F040 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C79FE111A7DBEB80091F040 /* Images.xcassets */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		80D755621D1FCFA8006E03AC /* json.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = json.swift; sourceTree = "<group>"; };
 		8C79FE051A7DBEB80091F040 /* BLMegane.temp_caseinsensitive_rename.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLMegane.temp_caseinsensitive_rename.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C79FE091A7DBEB80091F040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C79FE0A1A7DBEB80091F040 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				8C79FE3D1A7DC8EC0091F040 /* SDKImage */,
 				8C79FE111A7DBEB80091F040 /* Images.xcassets */,
 				8C79FE081A7DBEB80091F040 /* Supporting Files */,
+				80D755621D1FCFA8006E03AC /* json.swift */,
 			);
 			path = FunikiSDKExampleSwift;
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 				8C79FE0D1A7DBEB80091F040 /* FunikiSDKViewController.swift in Sources */,
 				8CA309A01A8C4AB0002A2DD3 /* Funiki.m in Sources */,
 				8C79FE0B1A7DBEB80091F040 /* AppDelegate.swift in Sources */,
+				80D755631D1FCFA8006E03AC /* json.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
