@@ -21,16 +21,6 @@
                                 <rect key="frame" x="0.0" y="135" width="320" height="312"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" id="Iuy-Rp-yvg">
-                                        <rect key="frame" x="15" y="243" width="290" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <segments>
-                                            <segment title="無音"/>
-                                            <segment title="小"/>
-                                            <segment title="中"/>
-                                            <segment title="大"/>
-                                        </segments>
-                                    </segmentedControl>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LVk-SI-raq">
                                         <rect key="frame" x="247" y="38" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -121,7 +111,6 @@
                         <outlet property="latitudeLabel" destination="vE8-rB-n46" id="974-EO-51w"/>
                         <outlet property="longitudeLabel" destination="Gg6-uJ-NZG" id="3sb-iJ-Wi8"/>
                         <outlet property="sdkVersionLabel" destination="aax-GD-93K" id="ENm-MK-lde"/>
-                        <outlet property="volumeSegmentedControl" destination="Iuy-Rp-yvg" id="aCl-s2-oZd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

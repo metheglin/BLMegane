@@ -112,7 +112,8 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
     
     func enableCriminalSuppressor() {
         if (funikiManager.connected){
-            funikiManager.changeLeftColor(UIColor.blueColor(), rightColor: UIColor.blueColor(), duration: 1.0, buzzerFrequency: freqFromSlider(), buzzerVolume: selectedBuzzerVolume())
+            let volume:MAFunikiManagerBuzzerVolume! = .Medium
+            funikiManager.changeLeftColor(UIColor.blueColor(), rightColor: UIColor.blueColor(), duration: 1.0, buzzerFrequency: freqFromSlider(), buzzerVolume: volume)
         }
     }
     
@@ -149,8 +150,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
     // MARK: - UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.volumeSegmentedControl.selectedSegmentIndex = 2
+
         self.sdkVersionLabel.text = "SDK Version:" + MAFunikiManager.funikiSDKVersionString()
         
         // Location Managerの生成、初期化
@@ -158,7 +158,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         if #available(iOS 9.0, *) {
             locationManager?.allowsBackgroundLocationUpdates = true
         }
-        locationManager?.distanceFilter = 75 // 75mごとに通知
+        locationManager?.distanceFilter = 50 // 50mごとに通知
         locationManager?.delegate = self
         if CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedAlways { // 注1
             locationManager?.requestAlwaysAuthorization()
@@ -219,27 +219,6 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
     
     @IBAction func stop(sender:AnyObject!) {
         funikiManager.changeLeftColor(UIColor.blackColor(), rightColor: UIColor.blackColor(), duration: 1.0)
-    }
-    
-    // MARK: - UI->Value
-    func selectedBuzzerVolume () -> MAFunikiManagerBuzzerVolume {
-        
-        let selectedSegmentIndex = volumeSegmentedControl.selectedSegmentIndex
-        var volume:MAFunikiManagerBuzzerVolume!
-        
-        switch(selectedSegmentIndex){
-        case 0:
-            volume = .Mute
-        case 1:
-            volume = .Low
-        case 2:
-            volume = .Medium
-        case 3:
-            volume = .Loud
-        default:
-            volume = .Mute
-        }
-        return volume!
     }
     
     func freqFromSlider()-> Int {
