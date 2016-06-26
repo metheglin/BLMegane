@@ -11,8 +11,6 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
     let funikiManager = MAFunikiManager.sharedInstance()
     
     @IBOutlet var volumeSegmentedControl:UISegmentedControl!
-    @IBOutlet var frequencySlider:UISlider!
-    @IBOutlet var frequencyLabel:UILabel!
     @IBOutlet var connectionLabel:UILabel!
     @IBOutlet var batteryLabel:UILabel!
     @IBOutlet weak var sdkVersionLabel: UILabel!
@@ -154,7 +152,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         if #available(iOS 9.0, *) {
             locationManager?.allowsBackgroundLocationUpdates = true
         }
-        locationManager?.distanceFilter = 500 // 500m移動したら通知する。
+        locationManager?.distanceFilter = 75 // 75mごとに通知
         locationManager?.delegate = self
         if CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedAlways { // 注1
             locationManager?.requestAlwaysAuthorization()
@@ -172,7 +170,6 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         
         updateConnectionStatus()
         updateBatteryLevel()
-        buzzerFrequencyChanged(nil)
         
         super.viewWillAppear(animated)
     }
@@ -215,31 +212,8 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         
     }
     
-    // MARK: - Action
-    @IBAction func red(sender:AnyObject!) {
-        if (funikiManager.connected){
-            funikiManager.changeLeftColor(UIColor.redColor(), rightColor: UIColor.redColor(), duration: 1.0, buzzerFrequency: freqFromSlider(), buzzerVolume: selectedBuzzerVolume())
-        }
-    }
-    
-    @IBAction func green(sender:AnyObject!) {
-        if (funikiManager.connected){
-            funikiManager.changeLeftColor(UIColor.greenColor(), rightColor: UIColor.greenColor(), duration: 1.0, buzzerFrequency: freqFromSlider(), buzzerVolume: selectedBuzzerVolume())
-        }
-    }
-    
-    @IBAction func blue(sender:AnyObject!) {
-        if (funikiManager.connected){
-            funikiManager.changeLeftColor(UIColor.blueColor(), rightColor: UIColor.blueColor(), duration: 1.0, buzzerFrequency: freqFromSlider(), buzzerVolume: selectedBuzzerVolume())
-        }
-    }
-    
     @IBAction func stop(sender:AnyObject!) {
         funikiManager.changeLeftColor(UIColor.blackColor(), rightColor: UIColor.blackColor(), duration: 1.0)
-    }
-    
-    @IBAction func buzzerFrequencyChanged(sender:AnyObject!) {
-        frequencyLabel.text = NSString(format: "%0.0ld", freqFromSlider()) as String
     }
     
     // MARK: - UI->Value
@@ -264,7 +238,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
     }
     
     func freqFromSlider()-> Int {
-        let value:Int = Int(pow(self.frequencySlider.value, 2.0))
+        let value:Int = Int(pow(500.0, 2.0))
         // 雰囲気メガネが発音可能な周波数に丸めます
         return funikiManager.roundedBuzzerFrequency(value)
     }

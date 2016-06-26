@@ -21,68 +21,6 @@
                                 <rect key="frame" x="0.0" y="135" width="320" height="312"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="SDKtab.png" id="t0r-je-dXC">
-                                        <rect key="frame" x="5" y="96" width="310" height="190"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3MQ-9o-6a0">
-                                        <rect key="frame" x="167" y="38" width="65" height="65"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="緑" backgroundImage="Button-green.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="green:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="7wL-Be-lOZ"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oDT-Jg-DO8">
-                                        <rect key="frame" x="87" y="38" width="65" height="65"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="青" backgroundImage="Button-blue.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="blue:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="MYe-v0-YVf"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6gi-EM-x2I">
-                                        <rect key="frame" x="7" y="38" width="170" height="26"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <string key="text" base64-UTF8="YES">
-TEVECOODu+ODluOCtuODvA
-</string>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="28" minValue="10" maxValue="70" id="NWg-PE-Qj5">
-                                        <rect key="frame" x="13" y="178" width="294" height="31"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="buzzerFrequencyChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="24K-Ah-JcA"/>
-                                        </connections>
-                                    </slider>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="音の高さ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QHp-xm-3BV">
-                                        <rect key="frame" x="15" y="118" width="68" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Leq-No-dYc">
-                                        <rect key="frame" x="81" y="129" width="96" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                        <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hz" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="iGz-rx-jEr">
-                                        <rect key="frame" x="179" y="132" width="49" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                        <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" id="Iuy-Rp-yvg">
                                         <rect key="frame" x="15" y="243" width="290" height="29"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -93,16 +31,6 @@ TEVECOODu+ODluOCtuODvA
                                             <segment title="大"/>
                                         </segments>
                                     </segmentedControl>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cIb-Zu-c0q">
-                                        <rect key="frame" x="8" y="38" width="65" height="65"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="赤" backgroundImage="Button-red.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="red:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="B2b-xR-Nq6"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="LVk-SI-raq">
                                         <rect key="frame" x="247" y="38" width="65" height="65"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -114,13 +42,6 @@ TEVECOODu+ODluOCtuODvA
                                             <action selector="stop:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vdW-D0-drj"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="音の大きさ" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lvt-wS-lud">
-                                        <rect key="frame" x="15" y="216" width="85" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vE8-rB-n46" userLabel="緯度">
                                         <rect key="frame" x="8" y="9" width="130" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -186,8 +107,6 @@ TEVECOODu+ODluOCtuODvA
                     <connections>
                         <outlet property="batteryLabel" destination="MjN-au-oBH" id="Jmm-dF-7f7"/>
                         <outlet property="connectionLabel" destination="iwE-sx-mwM" id="wZ1-5m-2f8"/>
-                        <outlet property="frequencyLabel" destination="Leq-No-dYc" id="X1y-TS-yYa"/>
-                        <outlet property="frequencySlider" destination="NWg-PE-Qj5" id="jvb-Fv-Xsg"/>
                         <outlet property="latitudeLabel" destination="vE8-rB-n46" id="974-EO-51w"/>
                         <outlet property="longitudeLabel" destination="Gg6-uJ-NZG" id="3sb-iJ-Wi8"/>
                         <outlet property="sdkVersionLabel" destination="aax-GD-93K" id="ENm-MK-lde"/>
@@ -460,15 +379,11 @@ TEVECOODu+ODluOCtuODvA
         </scene>
     </scenes>
     <resources>
-        <image name="Button-blue.png" width="65" height="65"/>
-        <image name="Button-green.png" width="65" height="65"/>
         <image name="Button-off.png" width="65" height="65"/>
-        <image name="Button-red.png" width="65" height="65"/>
         <image name="GraphFrame.png" width="240" height="95"/>
         <image name="Illuminate.png" width="40" height="35"/>
         <image name="Pairing.png" width="295" height="49"/>
         <image name="SDKlogo.png" width="120" height="26"/>
-        <image name="SDKtab.png" width="310" height="190"/>
         <image name="Sensor.png" width="26" height="27"/>
     </resources>
 </document>
