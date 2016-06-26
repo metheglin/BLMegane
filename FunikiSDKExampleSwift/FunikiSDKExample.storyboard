@@ -42,17 +42,35 @@
                                             <action selector="stop:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="vdW-D0-drj"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vE8-rB-n46" userLabel="緯度">
-                                        <rect key="frame" x="8" y="9" width="130" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="現在地の緯度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="vE8-rB-n46" userLabel="緯度">
+                                        <rect key="frame" x="10" y="10" width="230" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="6"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gg6-uJ-NZG" userLabel="経度">
-                                        <rect key="frame" x="157" y="9" width="144" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="現在地の経度：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gg6-uJ-NZG" userLabel="経度">
+                                        <rect key="frame" x="10" y="60" width="230" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="6"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bnH-CC-Cky">
+                                        <rect key="frame" x="10" y="115" width="69" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.12738634510758839" green="0.53891119028968382" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title="更新">
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="location:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fwf-O0-Mso"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="最寄りの危険ゾーンまで" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="J3O-cq-QHL">
+                                        <rect key="frame" x="10" y="166" width="295" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -91,14 +109,6 @@
                                 <color key="textColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="bnH-CC-Cky">
-                                <rect key="frame" x="155" y="102" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="location:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fwf-O0-Mso"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
@@ -107,6 +117,7 @@
                     <connections>
                         <outlet property="batteryLabel" destination="MjN-au-oBH" id="Jmm-dF-7f7"/>
                         <outlet property="connectionLabel" destination="iwE-sx-mwM" id="wZ1-5m-2f8"/>
+                        <outlet property="dangerStatusLabel" destination="J3O-cq-QHL" id="2PZ-Ov-eTb"/>
                         <outlet property="latitudeLabel" destination="vE8-rB-n46" id="974-EO-51w"/>
                         <outlet property="longitudeLabel" destination="Gg6-uJ-NZG" id="3sb-iJ-Wi8"/>
                         <outlet property="sdkVersionLabel" destination="aax-GD-93K" id="ENm-MK-lde"/>

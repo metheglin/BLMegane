@@ -19,6 +19,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
     @IBAction func location(sender: AnyObject) {
         locationManager?.startUpdatingLocation()
     }
+    @IBOutlet weak var dangerStatusLabel: UILabel!
     
     var locationManager: CLLocationManager?
     var dangerZones: JSON?
@@ -67,7 +68,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         print("dangerZones\(dangerZones)")
     }
     
-    func getNearesDangerZone( curLocation: CLLocation ) -> (nearestDistance:Double, nearest:JSON) {
+    func getNearesDangerZone( curLocation: CLLocation ) -> (nearestDangerName:String, nearestDistance:Double, nearest:JSON) {
         let nearestObj:[String:Double] = [
             "latitude": 0.0,
             "longitude": 0.0,
@@ -75,6 +76,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         ]
         var nearest:JSON = JSON(nearestObj)
         var nearestDistance:Double = Double.infinity
+        var nearestDangerName = ""
         
         for (key, zone) in self.dangerZones! {
             let lat:Double? = zone["latitude"].asDouble
@@ -82,25 +84,29 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
             let targetLocation = CLLocation(latitude: lat!, longitude: lng!)
             let distance = curLocation.distanceFromLocation(targetLocation)
             if distance < nearestDistance {
+                nearestDangerName = key as! String
                 nearest = zone
                 nearestDistance = distance
             }
             print(String(format: "\(key)までの距離 %fm", distance))
         }
-        return (nearestDistance, nearest)
+        return (nearestDangerName, nearestDistance, nearest)
     }
     
     func checkInsideDangerZone( curLocation: CLLocation ) -> Bool {
-        let dangerZone:(Double,JSON) = getNearesDangerZone( curLocation )
-        let distance:Double = dangerZone.0
-        let zone:JSON = dangerZone.1
+        let dangerZone:(String,Double,JSON) = getNearesDangerZone( curLocation )
+        let key = dangerZone.0
+        let distance:Double = dangerZone.1
+        let zone:JSON = dangerZone.2
         let radius:Double? = zone["radius"].asDouble
         
         if distance <= radius {
-            print("危険ゾーンに入ってます")
+//            print("危険ゾーンに入ってます")
+            dangerStatusLabel.text = "危険ゾーン\(key)に入りました"
             return true
         }
-        print("最寄りの危険ゾーンまで\(distance)mです")
+//        print("最寄りの危険ゾーンまで\(distance)mです")
+        dangerStatusLabel.text = String(format: "最寄りの危険ゾーン\(key)まで%dmです", Int(distance))
         return false
     }
     
@@ -158,7 +164,6 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
             locationManager?.requestAlwaysAuthorization()
             // 位置情報サービスを開始するか、ユーザに尋ねるダイアログを表示する。
         }
-//        locationManager?.startUpdatingLocation()
         getDangerZones()
         
     }
