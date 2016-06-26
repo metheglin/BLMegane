@@ -23,6 +23,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
     
     var locationManager: CLLocationManager?
     var dangerZones: JSON?
+    var angleToDanger: Double = 0.0
     
     // 日本測地系座標を世界測地系座標に変換しますが、おそらくこの処理は不要...
     func convertToWGS84( lat_tokyo: Float64, lng_tokyo: Float64 ) -> CLLocation {
@@ -47,6 +48,25 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         return CLLocation( latitude: lat_wgs84, longitude: lng_wgs84 )
     }
     
+    func degreesToRadians(degrees: Double) -> Double { return degrees * M_PI / 180.0 }
+    func radiansToDegrees(radians: Double) -> Double { return radians * 180.0 / M_PI }
+    func getBearingBetween(point1 : CLLocation, point2 : CLLocation) -> Double {
+        
+        let lat1 = degreesToRadians(point1.coordinate.latitude)
+        let lon1 = degreesToRadians(point1.coordinate.longitude)
+        
+        let lat2 = degreesToRadians(point2.coordinate.latitude);
+        let lon2 = degreesToRadians(point2.coordinate.longitude);
+        
+        let dLon = lon2 - lon1;
+        
+        let y = sin(dLon) * cos(lat2);
+        let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(dLon);
+        let radiansBearing = degreesToRadians(90) - atan2(y, x);
+        
+        return radiansToDegrees(radiansBearing)
+    }
+    
     // Location更新イベント
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let coord = locations[0].coordinate
@@ -54,13 +74,36 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         latitudeLabel.text = String(format: "%f", coord.latitude)
         longitudeLabel.text = String(format: "%f", coord.longitude)
         
-        // 距離
         let curLocation = CLLocation(latitude: coord.latitude, longitude: coord.longitude)
-        if checkInsideDangerZone( curLocation ) {
+        let dangerZone:(String,Double,JSON) = getNearesDangerZone( curLocation )
+        let dangerZoneName = dangerZone.0
+        let distance:Double = dangerZone.1
+        let zone:JSON = dangerZone.2
+        let dangerLocation = CLLocation(latitude: zone["latitude"].asDouble!, longitude: zone["longitude"].asDouble!)
+        let radius:Double? = zone["radius"].asDouble
+        angleToDanger = getBearingBetween( curLocation, point2: dangerLocation )
+        
+        if distance <= radius {
+            dangerStatusLabel.text = "危険ゾーン\(dangerZoneName)に入りました"
             enableCriminalSuppressor()
         } else {
+            dangerStatusLabel.text = String(format: "最寄りの危険ゾーン\(dangerZoneName)まで%dmです", Int(distance))
             disableCriminalSuppressor()
         }
+    }
+    
+    // デバイスの方位が変わるたびに呼ばれる
+    func locationManager(manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        let heading: CLLocationDirection = newHeading.magneticHeading
+        // アニメーションでコンパス画像を回転する
+//        [UIView beginAnimations:nil context:nil];
+//        [UIView setAnimationDuration:0.5f];
+//        compass.transform = CGAffineTransformMakeRotation(-(M_PI * (currentDir / 180)));
+//        CGAffineTransformMakeRotation( degreesToRadians(heading) )
+//        [UIView commitAnimations];
+        
+        print("heading: \(angleToDanger) \(heading)")
+//        self.textField.text = [NSString stringWithFormat:@"%.2f", heading];
     }
     
     func getDangerZones() {
@@ -91,23 +134,6 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
             print(String(format: "\(key)までの距離 %fm", distance))
         }
         return (nearestDangerName, nearestDistance, nearest)
-    }
-    
-    func checkInsideDangerZone( curLocation: CLLocation ) -> Bool {
-        let dangerZone:(String,Double,JSON) = getNearesDangerZone( curLocation )
-        let key = dangerZone.0
-        let distance:Double = dangerZone.1
-        let zone:JSON = dangerZone.2
-        let radius:Double? = zone["radius"].asDouble
-        
-        if distance <= radius {
-//            print("危険ゾーンに入ってます")
-            dangerStatusLabel.text = "危険ゾーン\(key)に入りました"
-            return true
-        }
-//        print("最寄りの危険ゾーンまで\(distance)mです")
-        dangerStatusLabel.text = String(format: "最寄りの危険ゾーン\(key)まで%dmです", Int(distance))
-        return false
     }
     
     func enableCriminalSuppressor() {
@@ -153,18 +179,28 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
 
         self.sdkVersionLabel.text = "SDK Version:" + MAFunikiManager.funikiSDKVersionString()
         
-        // Location Managerの生成、初期化
+        // 危険ゾーン定義リストを取得
+        getDangerZones()
+        
+        // LocationManager: 現在地取得と、方位取得で利用
         locationManager = CLLocationManager()
+        
         if #available(iOS 9.0, *) {
             locationManager?.allowsBackgroundLocationUpdates = true
         }
         locationManager?.distanceFilter = 50 // 50mごとに通知
         locationManager?.delegate = self
-        if CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedAlways { // 注1
+        if CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedAlways {
             locationManager?.requestAlwaysAuthorization()
-            // 位置情報サービスを開始するか、ユーザに尋ねるダイアログを表示する。
+            // 位置情報サービスの開始をユーザ確認
         }
-        getDangerZones()
+        
+        if CLLocationManager.headingAvailable() {
+            locationManager?.headingFilter = 5 // 5度変更ごとに更新
+            // locationManager?.headingOrientation = .faceUp
+            
+        }
+        
         
     }
     
@@ -186,7 +222,9 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         print("Firmware Revision\(manager.firmwareRevision)")
         updateConnectionStatus()
         updateBatteryLevel()
+        
         locationManager?.startUpdatingLocation()
+        locationManager?.startUpdatingHeading()
     }
     
     func funikiManagerDidDisconnect(manager: MAFunikiManager!, error: NSError!) {
@@ -196,7 +234,9 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         }
         updateConnectionStatus()
         updateBatteryLevel()
+        
         locationManager?.stopUpdatingLocation()
+        locationManager?.stopUpdatingHeading()
     }
     
     func funikiManager(manager: MAFunikiManager!, didUpdateBatteryLevel batteryLevel: MAFunikiManagerBatteryLevel) {
