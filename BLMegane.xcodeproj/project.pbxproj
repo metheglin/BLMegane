@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		802A11AE1D2930800048B3E1 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 802A11AD1D2930800048B3E1 /* Icon-60@3x.png */; };
+		802A11B01D2930AE0048B3E1 /* SDKlogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 802A11AF1D2930AE0048B3E1 /* SDKlogo@3x.png */; };
 		80A8E0691D20587E003F2FA0 /* magnetic.png in Resources */ = {isa = PBXBuildFile; fileRef = 80A8E0681D20587E003F2FA0 /* magnetic.png */; };
 		80A8E06B1D20596A003F2FA0 /* arrowToDanger.png in Resources */ = {isa = PBXBuildFile; fileRef = 80A8E06A1D20596A003F2FA0 /* arrowToDanger.png */; };
 		80A8E06D1D205A43003F2FA0 /* arrowCurrent.png in Resources */ = {isa = PBXBuildFile; fileRef = 80A8E06C1D205A43003F2FA0 /* arrowCurrent.png */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		802A11AD1D2930800048B3E1 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-60@3x.png"; path = "../../../../../Downloads/icon/ios/Icon-60@3x.png"; sourceTree = "<group>"; };
+		802A11AF1D2930AE0048B3E1 /* SDKlogo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "SDKlogo@3x.png"; path = "../../../../../Downloads/icon/ios/SDKlogo@3x.png"; sourceTree = "<group>"; };
 		80A8E0681D20587E003F2FA0 /* magnetic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = magnetic.png; sourceTree = "<group>"; };
 		80A8E06A1D20596A003F2FA0 /* arrowToDanger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowToDanger.png; sourceTree = "<group>"; };
 		80A8E06C1D205A43003F2FA0 /* arrowCurrent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowCurrent.png; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 		8C79FE3D1A7DC8EC0091F040 /* SDKImage */ = {
 			isa = PBXGroup;
 			children = (
+				802A11AF1D2930AE0048B3E1 /* SDKlogo@3x.png */,
+				802A11AD1D2930800048B3E1 /* Icon-60@3x.png */,
 				80A8E06C1D205A43003F2FA0 /* arrowCurrent.png */,
 				80A8E06A1D20596A003F2FA0 /* arrowToDanger.png */,
 				80A8E0681D20587E003F2FA0 /* magnetic.png */,
@@ -229,9 +235,11 @@
 				80A8E06B1D20596A003F2FA0 /* arrowToDanger.png in Resources */,
 				80A8E06D1D205A43003F2FA0 /* arrowCurrent.png in Resources */,
 				8C8E3D1E1A7DD68A00349FA0 /* Icon-60@2x.png in Resources */,
+				802A11AE1D2930800048B3E1 /* Icon-60@3x.png in Resources */,
 				8C79FE4B1A7DC8EC0091F040 /* Button-green@2x.png in Resources */,
 				8C79FE521A7DC8EC0091F040 /* SDKlogo@2x.png in Resources */,
 				8C79FE4F1A7DC8EC0091F040 /* GraphFrame@2x.png in Resources */,
+				802A11B01D2930AE0048B3E1 /* SDKlogo@3x.png in Resources */,
 				8C79FE541A7DC8EC0091F040 /* Sensor@2x.png in Resources */,
 				8C79FE4C1A7DC8EC0091F040 /* Button-off@2x.png in Resources */,
 				8C79FE4D1A7DC8EC0091F040 /* Button-red@2x.png in Resources */,
@@ -364,7 +372,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				INFOPLIST_FILE = FunikiSDKExampleSwift/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -373,7 +381,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.metheglin.blmegane;
 				PRODUCT_NAME = BLMegane.temp_caseinsensitive_rename;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "e9576308-6c7b-453c-b69c-0f819c5b2d37";
 				SWIFT_OBJC_BRIDGING_HEADER = "FunikiSDKExampleSwift-Bridging-Header.h";
 			};
 			name = Release;

@@ -13,7 +13,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
     @IBOutlet var volumeSegmentedControl:UISegmentedControl!
     @IBOutlet var connectionLabel:UILabel!
     @IBOutlet var batteryLabel:UILabel!
-    @IBOutlet weak var sdkVersionLabel: UILabel!
+//    @IBOutlet weak var sdkVersionLabel: UILabel!
     @IBOutlet weak var latitudeLabel: UILabel!
     @IBOutlet weak var longitudeLabel: UILabel!
     @IBAction func location(sender: AnyObject) {
@@ -178,8 +178,6 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
     // MARK: - UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.sdkVersionLabel.text = "SDK Version:" + MAFunikiManager.funikiSDKVersionString()
         
         // 危険ゾーン定義リストを取得
         getDangerZones()
@@ -190,7 +188,7 @@ class FunikiSDKViewController: UIViewController, MAFunikiManagerDelegate, MAFuni
         if #available(iOS 9.0, *) {
             locationManager?.allowsBackgroundLocationUpdates = true
         }
-        locationManager?.distanceFilter = 50 // 50mごとに通知
+        locationManager?.distanceFilter = 25 // 25mごとに通知
         locationManager?.delegate = self
         if CLLocationManager.authorizationStatus() != CLAuthorizationStatus.AuthorizedAlways {
             locationManager?.requestAlwaysAuthorization()
